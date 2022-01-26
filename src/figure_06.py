@@ -21,7 +21,8 @@ mpl.rcParams['xtick.labelsize'] = 12
 mpl.rcParams['ytick.labelsize'] = 12
 mpl.rcParams['ps.useafm'] = True
 mpl.rcParams['pdf.use14corefonts'] = True
-mpl.rcParams['text.usetex'] = True
+# Issues with tex on JASMIN, so set this to False...
+mpl.rcParams['text.usetex'] = False
 mpl.rcParams['font.family']= 'sans-serif'
 mpl.rcParams['font.sans-serif'] = 'Helvetica'
 import matplotlib.pyplot as plt
@@ -31,19 +32,19 @@ from mpl_toolkits.axes_grid1 import make_axes_locatable
 import climtools as ct
 #===========================================================================
 #
-fileclimmean  = 'data_figure_01a.nc'
+fileclimmean  = '../data/data_figure_01a.nc'
 #
-filespread       = 'data_figure_06a_var.nc'
-filespreadBTR    = 'data_figure_06c_BTR_ensvar.nc'
-filespreadRES    = 'data_figure_06c_RES_ensvar.nc'
-filespreadGEO    = 'data_figure_06c_GEO_ensvar.nc'
-filespreadGEOBTR = 'data_figure_06c_GEOBTR_ensvar.nc'
+filespread       = '../data/data_figure_06a_var.nc'
+filespreadBTR    = '../data/data_figure_06c_BTR_ensvar.nc'
+filespreadRES    = '../data/data_figure_06c_RES_ensvar.nc'
+filespreadGEO    = '../data/data_figure_06c_GEO_ensvar.nc'
+filespreadGEOBTR = '../data/data_figure_06c_GEOBTR_ensvar.nc'
 
-fileclimvar  = 'data_figure_02a.nc'
-fileclimvarBTR = '/group_workspaces/jasmin2/nemo/vol4/agathe/work/ORCA0083/N006/climato/d05/ORCA0083-N06_timestd_19602012_BTRvalor_d05.nc'
-fileclimvarRES = '/group_workspaces/jasmin2/nemo/vol4/agathe/work/ORCA0083/N006/climato/d05/ORCA0083-N06_timestd_19602012_RESvalor_d05.nc'
-fileclimvarGEO = '/group_workspaces/jasmin2/nemo/vol4/agathe/work/ORCA0083/N006/climato/d05/ORCA0083-N06_timestd_19602012_GEOvalor_d05.nc'
-fileclimvarGEOBTR = '/group_workspaces/jasmin2/nemo/vol4/agathe/work/ORCA0083/N006/climato/d05/ORCA0083-N06_timestd_19602012_GEOBTRvalor_d05.nc'
+fileclimvar       = '../data/data_figure_02a.nc'
+fileclimvarBTR    = '../data/ORCA0083-N06_timestd_19602012_BTRvalor_d05.nc'
+fileclimvarRES    = '../data/ORCA0083-N06_timestd_19602012_RESvalor_d05.nc'
+fileclimvarGEO    = '../data/ORCA0083-N06_timestd_19602012_GEOvalor_d05.nc'
+fileclimvarGEOBTR = '../data/ORCA0083-N06_timestd_19602012_GEOBTRvalor_d05.nc'
 #===========================================================================
 if not os.path.exists(filespread) :
     sys.exit('The data file does not exit, I quit !')
@@ -186,14 +187,14 @@ ax1.set_xticks([-25., -15., -5., 0., 5., 15., 25., 35., 45., 55., 65.])
 ax1.set_xticklabels(labels,fontsize=fstlab)
 ax1.set_xlim([-34., 65.])
 ax1.set_ylabel('depth (m)',fontsize=fslab)
-ax1.set_axis_bgcolor('lightgray')
+ax1.set_facecolor('lightgray')
 #
 # ax1b = ax1.twinx() 
 # ax1b.plot(lat,secdepth,color='black',lw=1.3)
 # ax1b.set_xlim([-34., 65.])
 # divider = make_axes_locatable(ax1b)
 # cax1b = divider.append_axes("right", size="5%", pad=0.4)
-# cax1b.set_axis_bgcolor('none')
+# cax1b.set_facecolor('none')
 # for axis in ['top','bottom','left','right']:
 #     cax1b.spines[axis].set_linewidth(0)
 # cax1b.set_xticks([])
@@ -214,7 +215,7 @@ ax2.set_xticks([-25., -15., -5., 0., 5., 15., 25., 35., 45., 55., 65.])
 ax2.set_xticklabels(labels,fontsize=fstlab)
 ax2.set_xlim([-34., 65.])
 ax2.set_ylabel('depth (m)',fontsize=fslab)
-ax2.set_axis_bgcolor('lightgray')
+ax2.set_facecolor('lightgray')
 #
 # axe pour la colorbar 1
 divider = make_axes_locatable(ax2)
@@ -244,7 +245,7 @@ ax3.set_ylim([0., 1.2])
 # rajout d'un axe vide pour l'alignement des subplots
 divider = make_axes_locatable(ax3)
 cax3 = divider.append_axes("right", size="5%", pad=0.4)
-cax3.set_axis_bgcolor('none')
+cax3.set_facecolor('none')
 for axis in ['top','bottom','left','right']:
     cax3.spines[axis].set_linewidth(0)
 cax3.set_xticks([])
@@ -259,5 +260,5 @@ cax3.legend(handles=[lamoc,lbtr,lgeo,lgeobtr,lres],frameon=False,loc=(-1,0.1),fo
 
 
 plt.subplots_adjust(hspace=0.3)
-plt.savefig('figure_06.png')
+plt.savefig('../figures/figure_06.png')
 

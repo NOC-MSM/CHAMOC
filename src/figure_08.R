@@ -2,15 +2,15 @@ rm(list= ls())
 graphics.off()
 # ==========================================================================
 library(ncdf4)
-source('~/TOOLS/R/Rnoc_350.R')
-source('~/TOOLS/R/listexp.R')
+source('TOOLS/R/Rnoc_350.R')
+source('TOOLS/R/listexp.R')
 # ==========================================================================
 refperiod=c(2004,2008)
 valperiod=c(2004,2012)
 # ==========================================================================
 # OBS
 # ===
-fobs = '/group_workspaces/jasmin2/nemo/vol5/public/OBS/VALOR/moc_transports.nc'
+fobs = '../data/moc_transports.nc'
 # NEMO
 # ====
 #diagid='valormoc'
@@ -639,7 +639,7 @@ xtickpos = c(as.PCICt("2004-01-01",cal="gregorian"),as.PCICt("2005-01-01",cal="g
 yrlist=c('2004','2005','2006','2007','2008','2009','2010','2011','2012','2013')
  
 # ===========================================================================
-fileout = "./figure_08.pdf"
+fileout = "../figures/figure_08.pdf"
 pdf(fileout,width=5,height=5)
 #
 ylim = c(-13,5)

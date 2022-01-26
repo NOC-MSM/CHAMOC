@@ -1,7 +1,7 @@
 rm(list= ls())
 library(ncdf4)
-source('~/TOOLS/R/Rnoc_350.R')
-source('~/TOOLS/R/listexp.R')
+source('TOOLS/R/Rnoc_350.R')
+source('TOOLS/R/listexp.R')
 # ==========================================================================
 #
 #
@@ -22,8 +22,7 @@ e9period=c(2009,2012)
 # ==========================================================================
 # RAPID dataset
 # =============
-#obs.f = '/group_workspaces/jasmin2/nemo/vol5/public/OBS/VALOR/moc_transports.nc'
-obs.f = '/gws/nopw/j04/nemo_vol5/public/OBS/VALOR/moc_transports.nc'
+obs.f = '../data/moc_transports.nc'
 
 obs.moc = mynt(obs.f, variable = 'moc_mar_hc10')
 obs.ekm = mynt(obs.f, variable = 't_ek10'      )
@@ -105,7 +104,7 @@ n6.Nt   = length( n6.mocz$time  )
 ## zz = get.lev()
 ## options(warn=0)
 
-## fileout = "./RAPID_profiles_MOCobs_v2.pdf"
+## fileout = "../figures/RAPID_profiles_MOCobs_v2.pdf"
 ## pdf(fileout,width=8,height=10)
 ## ylim=c(-6000,0)
 ## xlim=c(-35,35)
@@ -255,7 +254,7 @@ obs.axt = to.date(obs.moc$time,obs.moc$timeu,cal=obs.moc$timec)
 ## # ==========================================================================
 # PLOT
 # ===========================================================================
-fileout = "./figure_07_ATB.pdf"
+fileout = "../figures/figure_07.pdf"
 pdf(fileout,width=6,height=6)
 #
 lwd = 1.4

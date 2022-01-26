@@ -34,12 +34,12 @@ class timeaxis :
         """ timeax.list()
         Liste les caractéristiques de l'axe des temps timeax
         """
-        print "Caracteristics :"
-        print "id : ", self.id
-        print "shape : ", self.values.shape
-        print "units : ", self.units
-        print "Calendar : ", self.calendar
-        if self.origin is not None : print "origin : ", self.origin
+        print("Caracteristics :")
+        print("id : ", self.id )
+        print("shape : ", self.values.shape )
+        print("units : ", self.units )
+        print("Calendar : ", self.calendar )
+        if self.origin is not None : print("origin : ", self.origin )
     #
     # -----------------------------------------------------
     def month(self) :
@@ -92,11 +92,11 @@ class axis :
         """ timeax.list()
         Liste les caractéristiques de l'axe des temps timeax
         """
-        print self.id, " axis caracteristics :"
-        print "shape : ", self.values.shape
-        if self.units is not None : print "units : ", self.units
-        if self.id is not None : print "id : ", self.id
-        print "Range : ", self.values.min(), self.values.max()
+        print(self.id, " axis caracteristics :" )
+        print("shape : ", self.values.shape )
+        if self.units is not None : print("units : ", self.units )
+        if self.id is not None : print("id : ", self.id )
+        print("Range : ", self.values.min(), self.values.max() )
     #
     #
 

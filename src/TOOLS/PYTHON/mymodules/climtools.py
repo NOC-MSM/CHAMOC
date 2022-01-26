@@ -134,7 +134,7 @@ def climato(tab,timex,freq='MO') :
   elif freq=='YE' :
     newshape=tab.shape[1:]
   else :
-    print "unknown frequency in the function climato in the package climtools"
+    print("unknown frequency in the function climato in the package climtools")
   #
   #
   clim = N.empty(newshape)
@@ -167,13 +167,13 @@ def clim2d(expid,varname,period=None,mod='I') :
     tab,tax,lon,lat = readfield(exp.locfile(varname,realm=mod),varname,years=period)
     # OUTDIR :
     climout='/net/cratos/usr/cratos/varclim/agglod/mydiags/OUTPUTS/'
-    if mod is 'I' : ssrep='SeaIce/clim2d'
-    if mod is 'A' : ssrep='Atmo/clim2d'
-    if mod is 'O' : ssrep='Ocean/clim2d'
+    if mod == 'I' : ssrep='SeaIce/clim2d'
+    if mod == 'A' : ssrep='Atmo/clim2d'
+    if mod == 'O' : ssrep='Ocean/clim2d'
     try :
         climout = climout+ssrep
     except :
-        print """There is no realm %s for the expe %S"""%(mod,expid)
+        print("""There is no realm %s for the expe %S"""%(mod,expid))
     if exp.ismember :
         dirout = '%s/%s/%s/%s/'%(climout,exp.stream,exp.group,exp.ensemblename)
     else :
@@ -181,7 +181,7 @@ def clim2d(expid,varname,period=None,mod='I') :
 
     if not os.path.exists(dirout) : os.makedirs(dirout)
     fileout = '%s%s_clim2d_%s_%i-%i.nc'%(dirout,expid,varname,period[0],period[-1])
-    print """OUTPUTS will be placed in %s"""%(fileout)
+    print("""OUTPUTS will be placed in %s"""%(fileout))
 
     # MAIN
     newshape=(12,)+tab.shape[1:]
@@ -239,7 +239,7 @@ def clim2dsit(expid,period=None) :
 
     if not os.path.exists(dirout) : os.makedirs(dirout)
     fileout = '%s%s_clim2d_sit_%i-%i.nc'%(dirout,expid,period[0],period[1])
-    print """OUTPUTS will be placed in %s"""%(fileout)
+    print("""OUTPUTS will be placed in %s"""%(fileout))
     # MAIN
     newshape=(12,)+tab.shape[1:]
     clim = N.empty(newshape)
@@ -283,14 +283,14 @@ def clim2dsit(expid,period=None) :
 #                Masque et moyenne
 # =========================================================================
 def get_mask(domain,grid='ORCA2') :
-  if grid is 'ORCA2':
+  if grid == 'ORCA2':
     fgrid='/net/argos/data/parvati/agglod/DATA/IPSLCM/Mask_ORCA2.nc'
-  if grid is 'ORCA2IPSL':
+  if grid == 'ORCA2IPSL':
     fgrid='/net/argos/data/parvati/agglod/DATA/IPSLCM/otherMASK/Mask_ORCA2_MIZipsl.nc'
   try :
     f = nc.Dataset(fgrid)
   except :
-    print """Couldn't find de file : %s"""%(fgrid)
+    print("""Couldn't find de file : %s"""%(fgrid))
   #
   rmask = f.variables[domain][:,:,:]
   f.close()
@@ -300,15 +300,15 @@ def myweights(grid='ORCA2') :
   """ myweights(grid='ORCA2')
       Charge les poids correspondant à la grille grid.
   """
-  if grid is 'ORCA2' :
+  if grid == 'ORCA2' :
     fgrid='/net/cratos/usr/cratos/varclim/IPSLCM5A/PROD/piControl2/OCE/piControl2_mesh_mask.nc'
   else :
-    print """I don't know this grid : %s"""%(grid)
+    print("""I don't know this grid : %s"""%(grid))
   #
   try :
     f = nc.Dataset(fgrid)
   except :
-    print """Couldn't find the file : %s """%(fgrid)
+    print("""Couldn't find the file : %s """%(fgrid))
   #
   e1t = f.variables['e1t'][0,:,:]
   e2t = f.variables['e2t'][0,:,:]
@@ -354,34 +354,34 @@ Attention, pour operation = 'min' et 'max', il n'y a pas de pondération par la s
   tab = ma.masked_where(region_mask==0.,tab)
   wtmsk = ma.masked_where(region_mask==0.,wt)
   tmp = tab*wtmsk
-  if operation is 'sum' :
+  if operation == 'sum' :
     moyenne = ma.sum(tmp,axis=(len(tmp.shape)-1))
     moyenne = ma.sum(moyenne,axis=(len(moyenne.shape)-1))
-  elif operation is 'average' :
+  elif operation == 'average' :
     moyenne = ma.sum(tmp,axis=(len(tmp.shape)-1))
     moyenne = ma.sum(moyenne,axis=(len(moyenne.shape)-1))
     surfacetot = ma.sum(wtmsk,axis=(len(wtmsk.shape)-1))
     surfacetot = ma.sum(surfacetot,axis=(len(surfacetot.shape)-1))
     moyenne = moyenne/surfacetot
-  elif operation is 'max' :
+  elif operation == 'max' :
     moyenne = ma.max(tab,axis=(len(tmp.shape)-1))
     moyenne = ma.max(moyenne,axis=(len(moyenne.shape)-1))
-  elif operation is 'min' :
+  elif operation == 'min' :
     moyenne = ma.min(tab,axis=(len(tmp.shape)-1))
     moyenne = ma.min(moyenne,axis=(len(moyenne.shape)-1))
   else :
-    print """ Operation : %s is unknown"""%(operation)
+    print(""" Operation : %s is unknown"""%(operation))
   #
   #
   return moyenne
 # -----------------------------------------------------------------------
 def get_thkcello(grid='ORCA2') :
-  if grid is 'ORCA2':
+  if grid == 'ORCA2':
     fgrid='/net/cratos/usr/cratos/varclim/IPSLCM5A/PROD/piControl2/OCE/Analyse/TS_MO/piControl2_27500101_27991231_1M_thkcello.nc'
   try :
     f = nc.Dataset(fgrid)
   except :
-    print """Couldn't find de file : %s"""%(fgrid)
+    print("""Couldn't find de file : %s"""%(fgrid))
   #
   thkcello = f.variables['thkcello'][0,:,:,:]
   thkcello = thkcello.astype(N.float64)

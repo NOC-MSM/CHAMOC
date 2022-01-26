@@ -1,7 +1,7 @@
 rm(list= ls())
 library(ncdf4)
-source('~/TOOLS/R/Rnoc_350.R')
-source('~/TOOLS/R/listexp.R')
+source('TOOLS/R/Rnoc_350.R')
+source('TOOLS/R/listexp.R')
 # ==========================================================================
 #
 #
@@ -429,7 +429,7 @@ xtickpos = c(as.PCICt("2006-01-01",cal="gregorian"),as.PCICt("2007-01-01",cal="g
 yrlist=c('2006','2007','2008','2009','2010','2011','2012')#,'2011','2012','2013')
 #
 # Figure 03
-fileout = "./figure_09_ATB.pdf"
+fileout = "../figures/figure_09.pdf"
 pdf(fileout,width=6,height=4)
 #
 par(fig = c(0, 1, 0.5, 1),mar=c(2,2.4,1,1.6), mgp=c(1.5, 0.5, 0))

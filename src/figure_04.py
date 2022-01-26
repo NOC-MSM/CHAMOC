@@ -21,7 +21,8 @@ mpl.rcParams['xtick.labelsize'] = 12
 mpl.rcParams['ytick.labelsize'] = 12
 mpl.rcParams['ps.useafm'] = True
 mpl.rcParams['pdf.use14corefonts'] = True
-mpl.rcParams['text.usetex'] = True
+# Issues with tex on JASMIN, so set this to False...
+mpl.rcParams['text.usetex'] = False
 #mpl.rcParams['font.family']= 'sans-serif'
 #mpl.rcParams['font.sans-serif'] = 'Helvetica'
 import matplotlib.pyplot as plt
@@ -35,7 +36,7 @@ import plottools as pt
 varname = 'sovitmod'
 #
 ilat='28N'
-fileout = 'figure_04.png'
+fileout = '../figures/figure_04.png'
 #===========================================================================
 fclimmap = '../data/sovitmod_timemean_1960-2012.nc'
 #===========================================================================

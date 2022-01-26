@@ -21,7 +21,8 @@ mpl.rcParams['xtick.labelsize'] = 12
 mpl.rcParams['ytick.labelsize'] = 12
 mpl.rcParams['ps.useafm'] = True
 mpl.rcParams['pdf.use14corefonts'] = True
-mpl.rcParams['text.usetex'] = True
+# Issues with tex on JASMIN, so set this to False...
+mpl.rcParams['text.usetex'] = False
 mpl.rcParams['font.family']= 'sans-serif'
 mpl.rcParams['font.sans-serif'] = 'Helvetica'
 import matplotlib.pyplot as plt
@@ -172,7 +173,7 @@ ax3.set_ylabel('Standard deviation (Sv)',fontsize=fslab)
 # rajout d'un axe vide pour l'alignement des subplots
 divider = make_axes_locatable(ax3)
 cax3 = divider.append_axes("right", size="15%", pad=0.4)
-cax3.set_axis_bgcolor('none')
+cax3.set_facecolor('none')
 for axis in ['top','bottom','left','right']:
     cax3.spines[axis].set_linewidth(0)
 cax3.set_xticks([])
@@ -188,5 +189,5 @@ cax3.legend(handles=[lamoc,lekm,lbtr,lgeo,lgeobtr,lres],frameon=False,loc=(-0.5,
 #
 fig.tight_layout()
 plt.subplots_adjust(hspace=0.3)
-plt.savefig('figure_03.png')
+plt.savefig('../figures/figure_03.png')
 

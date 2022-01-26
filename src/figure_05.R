@@ -1,7 +1,7 @@
 rm(list= ls())
-library(ncdf)
-source('~/TOOLS/R/Rnoc.R')
-source('~/TOOLS/R/listexp.R')
+library(ncdf4)
+source('TOOLS/R/Rnoc_350.R')
+source('TOOLS/R/listexp.R')
 # ==========================================================================
 #
 #
@@ -363,7 +363,7 @@ e.fst.sat  = mean(c( e7.fst.var[ e7.index], e9.fst.var[ e9.index]))
 # ===========================================================================
 # PLOT
 # ===========================================================================
-fileout = "./figure_05.pdf"
+fileout = "../figures/figure_05.pdf"
 pdf(fileout,width=6,height=6)
 #
 ylim.moc  = c(0,30)

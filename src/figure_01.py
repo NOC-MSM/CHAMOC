@@ -21,7 +21,8 @@ mpl.rcParams['xtick.labelsize'] = 12
 mpl.rcParams['ytick.labelsize'] = 12
 mpl.rcParams['ps.useafm'] = True
 mpl.rcParams['pdf.use14corefonts'] = True
-mpl.rcParams['text.usetex'] = True
+# Issues with tex on JASMIN, so set this to False...
+mpl.rcParams['text.usetex'] = False
 mpl.rcParams['font.family']= 'sans-serif'
 mpl.rcParams['font.sans-serif'] = 'Helvetica'
 import matplotlib.pyplot as plt
@@ -141,7 +142,7 @@ ax1.set_xticks([-25., -15., -5., 0., 5., 15., 25., 35., 45., 55., 65.])
 ax1.set_xticklabels(labels,fontsize=fstlab)
 ax1.set_xlim([-34., 65.])
 ax1.set_ylabel('depth (m)',fontsize=fslab)
-ax1.set_axis_bgcolor('lightgray')
+ax1.set_facecolor('lightgray')
 #
 # axe pour la colorbar 1
 divider = make_axes_locatable(ax1)
@@ -161,7 +162,7 @@ ax2.set_xticks([-25., -15., -5., 0., 5., 15., 25., 35., 45., 55., 65.])
 ax2.set_xticklabels(labels,fontsize=fstlab)
 ax2.set_xlim([-34., 65.])
 ax2.set_ylabel('depth (m)',fontsize=fslab)
-ax2.set_axis_bgcolor('lightgray')
+ax2.set_facecolor('lightgray')
 ax2.fill_between(latBTR, -6000, 0, facecolor='lightgray',where=ma.logical_and(latBTR>-5,latBTR<5),edgecolor="b", linewidth=0.0)
 #
 # axe pour la colorbar 1
@@ -182,7 +183,7 @@ ax3.set_xticks([-25., -15., -5., 0., 5., 15., 25., 35., 45., 55., 65.])
 ax3.set_xticklabels(labels,fontsize=fstlab)
 ax3.set_xlim([-34., 65.])
 ax3.set_ylabel('depth (m)',fontsize=fslab)
-ax3.set_axis_bgcolor('lightgray')
+ax3.set_facecolor('lightgray')
 #
 # axe pour la colorbar 1
 divider = make_axes_locatable(ax3)
@@ -202,7 +203,7 @@ ax4.set_xticks([-25., -15., -5., 0., 5., 15., 25., 35., 45., 55., 65.])
 ax4.set_xticklabels(labels,fontsize=fstlab)
 ax4.set_xlim([-34., 65.])
 ax4.set_ylabel('depth (m)',fontsize=fslab)
-ax4.set_axis_bgcolor('lightgray')
+ax4.set_facecolor('lightgray')
 ax4.fill_between(latBTR, -6000, 0, facecolor='lightgray',where=ma.logical_and(latBTR>-5,latBTR<5),edgecolor="b", linewidth=0.0)
 #
 # axe pour la colorbar 1
@@ -223,7 +224,7 @@ ax5.set_xticks([-25., -15., -5., 0., 5., 15., 25., 35., 45., 55., 65.])
 ax5.set_xticklabels(labels,fontsize=fstlab)
 ax5.set_xlim([-34., 65.])
 ax5.set_ylabel('depth (m)',fontsize=fslab)
-ax5.set_axis_bgcolor('lightgray')
+ax5.set_facecolor('lightgray')
 ax5.fill_between(latBTR, -6000, 0, facecolor='lightgray',where=ma.logical_and(latBTR>-5,latBTR<5),edgecolor="b", linewidth=0.0)
 #
 # axe pour la colorbar 1
@@ -238,5 +239,5 @@ cb.ax.tick_params(labelsize=fscbtick)
 #
 fig.tight_layout()
 plt.subplots_adjust(hspace=0.3)
-plt.savefig('figure_01.png')
+plt.savefig('../figures/figure_01.png')
 

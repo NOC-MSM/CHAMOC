@@ -1,0 +1,13 @@
+name: CHAMOC
+channels:
+   - conda-forge
+dependencies:
+   - python=3.9.1
+   - netcdf4
+   - numpy
+   - scipy
+   - matplotlib
+   - basemap
+#   - pip=20.1.1
+#   - pip:
+#      - plottools
