@@ -1,0 +1,83 @@
+#!/bin/bash
+# script that launch the cdftool of your choice on the selected period
+# USAGE : 
+#       run_cdft cdfname year_start year_end optional arguement of the cdftool
+#
+# This script is made from Adam Blacker script : run_cdfmoc
+# updated : A. Germe, 04/02/2016
+# ======================================================================
+
+# Arguments
+# =========
+if [  $# -lt 3 ] then
+ echo " usage: run_cdft_bash cdfname year_start year_end [arg1 arg2 ...(optional)]"
+ exit
+fi
+#
+cdfname = $1
+eval "declare -A exp=$"${2}   #EXP information list
+yrstart = $3
+yrend   = $4
+#
+# Experiment info
+CONFIG="${exp["config"]}"
+nlev= "${exp["nlev"]}"
+ename="${exp["name"]}"
+#
+# CDFTOOLS info
+vars = "U V T"
+CDFTOOLS=/home/users/agathe/TOOLS/CDFTOOLS/myCDF/
+#
+#
+ginfp="${exp["ginfp"]}"
+if [ $nlev == 75 ]; then
+  if [ ! -h mesh_zgr.nc ]; then ln -s ${ginfp}/mesh_zgr.nc mesh_zgr.nc; fi
+  if [ ! -h mesh_hgr.nc ]; then ln -s ${ginfp}/mesh_hgr.nc mesh_hgr.nc; fi
+  if [ ! -h mask.nc ]; then ln -s ${ginfp}/mask.nc mask.nc; fi
+  if [ ! -h new_maskglo.nc ]; then ln -s ${ginfp}/new_maskglo.nc new_maskglo.nc; fi
+else
+  if [ ! -h mesh_zgr.nc ]; then ln -s ${ginfp}/mesh_zgr.nc mesh_zgr.nc; fi
+  if [ ! -h mesh_hgr.nc ]; then ln -s ${ginfp}/mesh_hgr.nc mesh_hgr.nc; fi
+  if [ ! -h mask.nc ]; then ln -s ${ginfp}/mask.nc mask.nc; fi
+  if [ ! -h new_maskglo.nc ]; then ln -s ${ginfp}/new_maskglo.nc new_maskglo.nc; fi
+fi
+#
+# MAIN LOOP
+# =========
+year=$yrstart
+while [ $year-le $yrend ]; do
+ dirm="${exp["dirm"]}"
+ echo $dirm
+ #
+ for im in {1..12}; do
+  printf -v month "%02d" $im
+  for id in {1..31}; do
+   printf -v day "%02d" $id
+   fname=${ename}_${year}${month}${day}d05
+   for var in $vars; do
+    if [ -f $dirm/${fname}$var.nc ]; then
+      #ln -s $dirm/${fname}$var.nc ${fname}$var.nc
+      echo $dirm/${fname}$var.nc
+    else
+     echo "$dirm/${fname}$var.nc does not exist!"
+     break
+    fi
+   done # end loop var
+#
+   if [ ! -e moc_${fname}.nc ]; then
+    if [ -l ${fname}V.nc ]; then
+     #$CDFTOOLS/$cdfname ${fname}T.nc 
+     #mv cdfheatc.nc cdfheatc_${fname}.nc
+     echo "ok"
+    fi
+   fi
+#
+   for var in $vars; do
+     if [ -h ${fname}$var.nc ]; then rm ${fname}$var.nc; fi
+   done # end of var loop
+  done # end day loop
+ done # end month loop
+ year=$((year+1))
+done # End year loop
+
+#exit

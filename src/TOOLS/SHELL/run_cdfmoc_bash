@@ -1,0 +1,79 @@
+#!/bin/bash
+#setenv LD_LIBRARY_PATH $LD_LIBRARY_PATH:/home/users/acc/TOOLS/lib
+source /home/users/agathe/TOOLS/SHELL/UTILS/list_exp.sh
+# ================================================================
+# USE : 
+#      Dans le repertoire de sortie du diag, lancer :
+#      ~/run_cdfmoc_bash expname yrdeb yrfin
+# ================================================================case 
+# if (  $#argv < 2 ) then
+#  echo " usage: run_cdfmoc year_start year_end"
+#  exit
+# endif
+#
+# Arguments
+# ---------
+eval "declare -A exp=$"${1}   #EXP information list
+echo $1
+yrstart=$2                   
+yrend=$3
+#
+# Experiment info
+CONFIG="${exp["config"]}"
+nlev="${exp["nlev"]}"
+ename="${exp["name"]}"
+#
+# CDFTOOLS info
+vars="U V T"
+CDFTOOLS=/group_workspaces/jasmin2/nemo/vol1/atb299/CDFTOOLS_rev_03Aug10
+#
+#
+ginfp="${exp["ginfp"]}"
+if [ $nlev == 75 ]; then
+  if [ ! -h mesh_zgr.nc ]; then ln -s ${ginfp}/mesh_zgr.nc mesh_zgr.nc; fi
+  if [ ! -h mesh_hgr.nc ]; then ln -s ${ginfp}/mesh_hgr.nc mesh_hgr.nc; fi
+  if [ ! -h mask.nc ]; then ln -s ${ginfp}/mask.nc mask.nc; fi
+  if [ ! -h new_maskglo.nc ]; then ln -s ${ginfp}/new_maskglo.nc new_maskglo.nc; fi
+else
+  if [ ! -h mesh_zgr.nc ]; then ln -s ${ginfp}/mesh_zgr.nc mesh_zgr.nc; fi
+  if [ ! -h mesh_hgr.nc ]; then ln -s ${ginfp}/mesh_hgr.nc mesh_hgr.nc; fi
+  if [ ! -h mask.nc ]; then ln -s ${ginfp}/mask.nc mask.nc; fi 
+  if [ ! -h new_maskglo.nc ]; then ln -s ${ginfp}/new_maskglo.nc new_maskglo.nc; fi
+fi
+#
+# MAIN LOOP
+# =========
+year=$yrstart
+while [ $year -le $yrend ]; do
+ dirm="${exp["dirm"]}"
+ #
+ for im in {1..12} ; do
+  printf -v month "%02d" $im
+  for id in {1..31}; do
+   printf -v day "%02d" $id
+   fname=${ename}_${year}${month}${day}d05
+   for var in $vars; do
+    if [ -f $dirm/${fname}$var.nc ]; then
+     ln -s $dirm/${fname}$var.nc ${fname}$var.nc
+    else
+     echo "$dirm/${fname}$var.nc does not exist!"
+     break
+    fi
+   done # end of var loop
+#
+   if [ ! -e valormoc_${fname}.nc ]; then
+    if [ -h ${fname}V.nc ]; then
+       $CDFTOOLS/cdfmoc_valor_section.ORCA12 ${fname}U.nc ${fname}V.nc ${fname}T.nc 
+       mv valormoc.nc valormoc_${fname}.nc
+    fi
+   fi
+#
+   for var in $vars; do
+    if [ -h ${fname}$var.nc ]; then rm ${fname}$var.nc; fi
+   done # end of var loop
+  done # end day loop
+ done # end month loop
+ year=$((year+1))
+done # end year loop
+
+# exit

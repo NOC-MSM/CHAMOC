@@ -1,0 +1,137 @@
+#!/bin/bash
+
+#===============================================================================#
+# How to use this script							#
+# ----------------------							#
+#										#
+# This script will create separate directories in which to run cdftools.	#
+# I have currently set this up to process monthly output, but only requires	#
+# minimal editing for annual or 5day means.					#
+#										#
+# Each directory contains links to mesh and mask files, and to the TUVW 	#
+# files for the date. 								#
+# 										#
+# The script then creates (and if required, submits to LOTUS) a run.pbs script.	#
+# One or more CDFtools can be executed, along with additional shell commands.	#
+# Note that other jobs (i.e. not just CDFtools) can be executed if desired.	#
+#										#
+# NOTE: It is the users responsibility to...					#
+# 1)  check/test that the commands will work as expected/required.		#
+# 2)  check/ensure that adequate resources (memory/walltime/etc) are requested.	#
+# 3)  check/ensure that there is adequate disk resource for the output.		#
+# 4)  I have made a crude attempt to deal with changes in variable names and 	#
+#     file locations from 2013 onwards. Some tools may work, others don't...	#
+#===============================================================================#
+
+# NOTE: current queue specifications are for max 2000 cores in short-serial
+# This means you can (in principle) process...
+# a) all annual means (2000 years of annual means)
+# b) all monthly means (166 years worth of monthly means)
+# c) 27 years of 5day means at a time 
+
+# Set start year
+yr=1958
+
+# Set end year (if ye == yr only that year will be processed)
+ye=1958
+
+# Path to domain information
+ginfp=/group_workspaces/jasmin2/nemo/vol1/ORCA0083-N006/domain/
+
+# Path to CDFtools (NOTE: this is my copy - I edit/recompile from time to time)
+CDFTOOLS=/group_workspaces/jasmin2/nemo/vol1/atb299/CDFTOOLS_3.0_rev935/bin/
+
+
+# ***Note: Path to monthly mean files changes from 2013 on  ***
+# ***Note: SST = sst from 1958-2012, then tos from 2013-2015***
+
+# Loop through years
+while [ $yr -le $ye ]
+do
+
+  # Set paths/files - currently set to find monthly files
+  if [ $yr -le 2012 ]
+    then
+    tfils="/group_workspaces/jasmin2/nemo/vol1/ORCA0083-N006/means/${yr}/*m*T.nc"
+    else
+    tfils="/group_workspaces/jasmin2/nemo/vol2/ORCA0083-N006/ANALYSIS/${yr}/*m*T.nc"
+  fi
+
+  # Loop through files and process
+  for i in `ls $tfils`
+  do
+    fname=`basename ${i%T.nc}`
+    odir=WT_${fname}
+    echo "Preparing to process: " $fname
+
+    # For (some) CDFtools need to keep output files separate so create separate directory
+    [ -d $odir ] && rm -fr $odir
+    mkdir $odir
+    cd $odir
+    
+    # Make links to grid/mask files
+    [ ! -L mesh_zgr.nc ] && ln -s ${ginfp}/mesh_zgr.nc mesh_zgr.nc
+    [ ! -L mesh_hgr.nc ] && ln -s ${ginfp}/mesh_hgr.nc mesh_hgr.nc
+    [ ! -L mask.nc ] && ln -s ${ginfp}/mask.nc mask.nc
+    [ ! -L new_maskglo.nc ] && ln -s ${ginfp}/new_maskglo.nc new_maskglo.nc
+    
+    # Make links to data files
+    [ ! -L ${fname}T.nc ] && ln -s ${i%T.nc}T.nc 
+    [ ! -L ${fname}U.nc ] && ln -s ${i%T.nc}U.nc 
+    [ ! -L ${fname}V.nc ] && ln -s ${i%T.nc}V.nc 
+    [ ! -L ${fname}W.nc ] && ln -s ${i%T.nc}W.nc 
+
+#======================================================================
+# Create run.pbs
+[ -f run.pbs ] && rm run.pbs 
+cat > run.pbs << EOF
+#!/bin/bash 
+#BSUB -q short-serial 
+#BSUB -J N06_analysis
+#BSUB -o %J.out 
+#BSUB -e %J.err 
+#BSUB -W 01:00
+    
+echo "Running cdftools"
+
+EOF
+
+# Select tools/scripts to suit pre/post 2013
+if [ $yr -le 2012 ]
+then
+# Add CDFtools/scripts for 1958-2012 here...
+   cat >> run.pbs << EOF
+   #$CDFTOOLS/cdfmoc ${fname}V.nc
+   #mv moc.nc moc_${fname}.nc
+   
+   $CDFTOOLS/cdfmocsig ${fname}V.nc ${fname}T.nc 2000
+   mv mocsig.nc mocsig2_${fname}.nc
+
+exit
+EOF
+else
+# Add CDFtools/scripts for 2013 onwards here...
+   cat >> run.pbs << EOF
+   #$CDFTOOLS/cdfmoc13on ${fname}V.nc
+   #mv moc.nc moc_${fname}.nc
+   
+   $CDFTOOLS/cdfmocsig13on ${fname}V.nc ${fname}T.nc 2000
+   mv mocsig.nc mocsig2_${fname}.nc
+
+exit
+EOF
+fi
+#======================================================================
+
+    # Launch job on LOTUS (comment if you just want to prepare and see the run.pbs)
+    bsub < run.pbs
+
+  cd ..
+  # End loop through files
+  done
+  
+  yr=$[$yr+1]
+  # End while loop through years
+done
+
+exit

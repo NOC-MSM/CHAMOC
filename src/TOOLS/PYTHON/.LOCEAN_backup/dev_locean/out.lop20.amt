@@ -1,0 +1,137 @@
+calc_AMT300bot_YE.py
+LOPAMTP191X20
+LOPAMTP191X20A
+Dates available for LOPAMTP191X20A : 1991-2010
+computing year 1991
+computing year 1992
+computing year 1993
+computing year 1994
+computing year 1995
+computing year 1996
+computing year 1997
+computing year 1998
+computing year 1999
+computing year 2000
+computing year 2001
+computing year 2002
+computing year 2003
+computing year 2004
+computing year 2005
+computing year 2006
+computing year 2007
+computing year 2008
+computing year 2009
+computing year 2010
+LOPAMTP191X20B
+Dates available for LOPAMTP191X20B : 1991-2010
+computing year 1991
+computing year 1992
+computing year 1993
+computing year 1994
+computing year 1995
+computing year 1996
+computing year 1997
+computing year 1998
+computing year 1999
+computing year 2000
+computing year 2001
+computing year 2002
+computing year 2003
+computing year 2004
+computing year 2005
+computing year 2006
+computing year 2007
+computing year 2008
+computing year 2009
+computing year 2010
+LOPAMTP191X20C
+Dates available for LOPAMTP191X20C : 1991-2010
+computing year 1991
+computing year 1992
+computing year 1993
+computing year 1994
+computing year 1995
+computing year 1996
+computing year 1997
+computing year 1998
+computing year 1999
+computing year 2000
+computing year 2001
+computing year 2002
+computing year 2003
+computing year 2004
+computing year 2005
+computing year 2006
+computing year 2007
+computing year 2008
+computing year 2009
+computing year 2010
+LOPAMTP191X20D
+Dates available for LOPAMTP191X20D : 1991-2010
+computing year 1991
+computing year 1992
+computing year 1993
+computing year 1994
+computing year 1995
+computing year 1996
+computing year 1997
+computing year 1998
+computing year 1999
+computing year 2000
+computing year 2001
+computing year 2002
+computing year 2003
+computing year 2004
+computing year 2005
+computing year 2006
+computing year 2007
+computing year 2008
+computing year 2009
+computing year 2010
+LOPAMTP191X20E
+Dates available for LOPAMTP191X20E : 1991-2010
+computing year 1991
+computing year 1992
+computing year 1993
+computing year 1994
+computing year 1995
+computing year 1996
+computing year 1997
+computing year 1998
+computing year 1999
+computing year 2000
+computing year 2001
+computing year 2002
+computing year 2003
+computing year 2004
+computing year 2005
+computing year 2006
+computing year 2007
+computing year 2008
+computing year 2009
+computing year 2010
+LOPAMTP191X20F
+Traceback (most recent call last):
+  File "calc_AMT300bot_YE.py", line 38, in <module>
+    exp = dexp[EXP_ID]
+KeyError: 'LOPAMTP191X20F'
+LOPAMTP191X20G
+Traceback (most recent call last):
+  File "calc_AMT300bot_YE.py", line 38, in <module>
+    exp = dexp[EXP_ID]
+KeyError: 'LOPAMTP191X20G'
+LOPAMTP191X20H
+Traceback (most recent call last):
+  File "calc_AMT300bot_YE.py", line 38, in <module>
+    exp = dexp[EXP_ID]
+KeyError: 'LOPAMTP191X20H'
+LOPAMTP191X20I
+Traceback (most recent call last):
+  File "calc_AMT300bot_YE.py", line 38, in <module>
+    exp = dexp[EXP_ID]
+KeyError: 'LOPAMTP191X20I'
+LOPAMTP191X20J
+Traceback (most recent call last):
+  File "calc_AMT300bot_YE.py", line 38, in <module>
+    exp = dexp[EXP_ID]
+KeyError: 'LOPAMTP191X20J'

@@ -1,0 +1,69 @@
+#!/bin/csh -f
+# script that launch the cdftool of your choice on the selected period
+# USAGE : 
+#       run_cdft cdfname year_start year_end optional arguement of the cdftool
+#
+# This script is made from Adam Blacker script : run_cdfmoc
+# updated : A. Germe, 04/02/2016
+# ======================================================================
+if (  $#argv < 3 ) then
+ echo " usage: run_cdft cdfname year_start year_end [arg1 arg2 ...(optional)]"
+ exit
+endif
+#
+set cdfname = ( $argv[1] )
+set start = ( $argv[2] )
+set end   = ( $argv[3] )
+#
+set CONFIG=ORCA0083-N06
+set nlev = 75
+set vars = "U V T"
+#
+set ginfp = /group_workspaces/jasmin2/nemo/vol1/ORCA0083-N006/domain
+if ( $nlev == 75 ) then
+  if ( ! -l mesh_zgr.nc ) ln -s ${ginfp}/mesh_zgr.nc mesh_zgr.nc
+  if ( ! -l mesh_hgr.nc ) ln -s ${ginfp}/mesh_hgr.nc mesh_hgr.nc
+  if ( ! -l mask.nc ) ln -s ${ginfp}/mask.nc mask.nc
+  if ( ! -l new_maskglo.nc ) ln -s ${ginfp}/new_maskglo.nc new_maskglo.nc
+else
+  if ( ! -l mesh_zgr.nc ) ln -s ${ginfp}/mesh_zgr.nc mesh_zgr.nc
+  if ( ! -l mesh_hgr.nc ) ln -s ${ginfp}/mesh_hgr.nc mesh_hgr.nc
+  if ( ! -l mask.nc ) ln -s ${ginfp}/mask.nc mask.nc 
+  if ( ! -l new_maskglo.nc ) ln -s ${ginfp}/new_maskglo.nc new_maskglo.nc
+endif
+#
+set CDFTOOLS=/home/users/agathe/TOOLS/CDFTOOLS/myCDF/
+#
+set year = $start
+while ( $year <= $end )
+set mdir = /group_workspaces/jasmin2/nemo/vol1/ORCA0083-N006/means/${year}
+echo $mdir
+#
+foreach month ( 01 02 03 04 05 06 07 08 09 10 11 12 )
+ foreach day (01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31)
+  set fname=${CONFIG}_${year}${month}${day}d05
+  foreach var ( `echo $vars` )
+    if ( -f $mdir/${fname}$var.nc ) then
+      ln -s $mdir/${fname}$var.nc ${fname}$var.nc
+    else
+     echo "$mdir/${fname}$var.nc does not exist!"
+      break
+    endif
+  end
+#
+  if ( ! -e moc_${fname}.nc ) then
+  if ( -l ${fname}V.nc ) then
+  $CDFTOOLS/$cdfname ${fname}T.nc 
+  mv cdfheatc.nc cdfheatc_${fname}.nc
+  endif
+  endif
+#
+  foreach var ( `echo $vars` )
+    if ( -l ${fname}$var.nc ) rm ${fname}$var.nc
+  end
+ end # End day loop
+end # End month loop
+@ year = $year + 1
+end # End year loop
+
+exit

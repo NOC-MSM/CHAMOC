@@ -1,0 +1,4 @@
+Help on function clim2d in module climtools:
+
+cclliimm22dd(expid, varname, period=None, mod='I')
+    clim2d(expid,varnam,period=None,mod='I')

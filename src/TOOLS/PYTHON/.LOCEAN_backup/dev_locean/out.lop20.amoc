@@ -1,0 +1,137 @@
+calc_AMOC_minmax.py
+LOPAMTP191X20
+LOPAMTP191X20A
+Dates available for LOPAMTP191X20A : 1991-2010
+ Computing year 1991
+ Computing year 1992
+ Computing year 1993
+ Computing year 1994
+ Computing year 1995
+ Computing year 1996
+ Computing year 1997
+ Computing year 1998
+ Computing year 1999
+ Computing year 2000
+ Computing year 2001
+ Computing year 2002
+ Computing year 2003
+ Computing year 2004
+ Computing year 2005
+ Computing year 2006
+ Computing year 2007
+ Computing year 2008
+ Computing year 2009
+ Computing year 2010
+LOPAMTP191X20B
+Dates available for LOPAMTP191X20B : 1991-2010
+ Computing year 1991
+ Computing year 1992
+ Computing year 1993
+ Computing year 1994
+ Computing year 1995
+ Computing year 1996
+ Computing year 1997
+ Computing year 1998
+ Computing year 1999
+ Computing year 2000
+ Computing year 2001
+ Computing year 2002
+ Computing year 2003
+ Computing year 2004
+ Computing year 2005
+ Computing year 2006
+ Computing year 2007
+ Computing year 2008
+ Computing year 2009
+ Computing year 2010
+LOPAMTP191X20C
+Dates available for LOPAMTP191X20C : 1991-2010
+ Computing year 1991
+ Computing year 1992
+ Computing year 1993
+ Computing year 1994
+ Computing year 1995
+ Computing year 1996
+ Computing year 1997
+ Computing year 1998
+ Computing year 1999
+ Computing year 2000
+ Computing year 2001
+ Computing year 2002
+ Computing year 2003
+ Computing year 2004
+ Computing year 2005
+ Computing year 2006
+ Computing year 2007
+ Computing year 2008
+ Computing year 2009
+ Computing year 2010
+LOPAMTP191X20D
+Dates available for LOPAMTP191X20D : 1991-2010
+ Computing year 1991
+ Computing year 1992
+ Computing year 1993
+ Computing year 1994
+ Computing year 1995
+ Computing year 1996
+ Computing year 1997
+ Computing year 1998
+ Computing year 1999
+ Computing year 2000
+ Computing year 2001
+ Computing year 2002
+ Computing year 2003
+ Computing year 2004
+ Computing year 2005
+ Computing year 2006
+ Computing year 2007
+ Computing year 2008
+ Computing year 2009
+ Computing year 2010
+LOPAMTP191X20E
+Dates available for LOPAMTP191X20E : 1991-2010
+ Computing year 1991
+ Computing year 1992
+ Computing year 1993
+ Computing year 1994
+ Computing year 1995
+ Computing year 1996
+ Computing year 1997
+ Computing year 1998
+ Computing year 1999
+ Computing year 2000
+ Computing year 2001
+ Computing year 2002
+ Computing year 2003
+ Computing year 2004
+ Computing year 2005
+ Computing year 2006
+ Computing year 2007
+ Computing year 2008
+ Computing year 2009
+ Computing year 2010
+LOPAMTP191X20F
+Traceback (most recent call last):
+  File "calc_AMOC_minmax.py", line 112, in <module>
+    exp = dexp[EXP_ID]
+KeyError: 'LOPAMTP191X20F'
+LOPAMTP191X20G
+Traceback (most recent call last):
+  File "calc_AMOC_minmax.py", line 112, in <module>
+    exp = dexp[EXP_ID]
+KeyError: 'LOPAMTP191X20G'
+LOPAMTP191X20H
+Traceback (most recent call last):
+  File "calc_AMOC_minmax.py", line 112, in <module>
+    exp = dexp[EXP_ID]
+KeyError: 'LOPAMTP191X20H'
+LOPAMTP191X20I
+Traceback (most recent call last):
+  File "calc_AMOC_minmax.py", line 112, in <module>
+    exp = dexp[EXP_ID]
+KeyError: 'LOPAMTP191X20I'
+LOPAMTP191X20J
+Traceback (most recent call last):
+  File "calc_AMOC_minmax.py", line 112, in <module>
+    exp = dexp[EXP_ID]
+KeyError: 'LOPAMTP191X20J'
