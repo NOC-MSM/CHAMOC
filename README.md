@@ -1,5 +1,7 @@
 # CHAMOC
-Code and data to recreate the results of the Germe et al. (2022) CHAMOC paper
+Code and data to recreate the results of the paper:
+
+Agathe Germe, Joel J.-M. Hirschi, Adam T. Blaker and Bablu Sinha (2022) Chaotic variability of the Atlantic meridional overturning circulation at sub-annual time scales, JPO
 
 
 ## Quick Start:
