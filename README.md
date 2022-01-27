@@ -3,6 +3,7 @@ Code and data to recreate the results of the paper:
 
 Agathe Germe, Joel J.-M. Hirschi, Adam T. Blaker and Bablu Sinha (2022) Chaotic variability of the Atlantic meridional overturning circulation at sub-annual time scales, JPO
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.5911238.svg)](https://doi.org/10.5281/zenodo.5911238)
 
 ## Quick Start:
 
