@@ -1,2 +1,6 @@
 # Edit file history
 *~
+
+
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*
