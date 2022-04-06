@@ -12,7 +12,7 @@ git clone git@github.com:NOC-MSM/CHAMOC.git
 ```
 or
 ```
-git clone https://github.com/NOC-MSM/PyNEMO.git
+git clone https://github.com/NOC-MSM/CHAMOC.git
 ```
 
 ## Create python environment
