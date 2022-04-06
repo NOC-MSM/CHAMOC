@@ -420,7 +420,8 @@ xlabels  = seq(0,13,1)
 par(new=T,fig = c(0, 1, 0.03, 0.33),mar=c(0.5,2.4,1,1), mgp=c(1.3, 0.5, 0))
 plot(e7.axt0,e7.moc.var,
      main = '(c) Ensemble variance',
-     ylab='Sv^2',xlab='',
+#    ylab='Sv^2',xlab='',
+     ylab=expression(Sv^~2),xlab='',
      lwd=1,type='l',lty='dotted',col='red',
      xaxt='n',
      xlim=xlim,ylim=ylim,

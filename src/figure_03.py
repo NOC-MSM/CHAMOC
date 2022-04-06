@@ -178,12 +178,12 @@ for axis in ['top','bottom','left','right']:
     cax3.spines[axis].set_linewidth(0)
 cax3.set_xticks([])
 cax3.set_yticks([])
-lamoc   = Line2D([], [], color='red',        label='amoc'   )
-lekm    = Line2D([], [], color='lawngreen', label='ekman'   )
-lres    = Line2D([], [], color='black',      label='residual'   )
-lbtr    = Line2D([], [], color='blue',       label='btr'    )
-lgeo    = Line2D([], [], color='fuchsia',    label='geosh'    )
-lgeobtr = Line2D([], [], color='orange',     label='geosh+btr')
+lamoc   = Line2D([], [], color='red',        label=' amoc'   )
+lekm    = Line2D([], [], color='lawngreen',  label=' ekman'   )
+lres    = Line2D([], [], color='black',      label=' residual'   )
+lbtr    = Line2D([], [], color='blue',       label=' btr'    )
+lgeo    = Line2D([], [], color='fuchsia',    label=' geosh'    )
+lgeobtr = Line2D([], [], color='orange',     label=' geosh+btr')
 cax3.legend(handles=[lamoc,lekm,lbtr,lgeo,lgeobtr,lres],frameon=False,loc=(-0.5,0.1),fontsize=12,handletextpad=0.,borderpad=1. )
 #
 #
