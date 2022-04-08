@@ -12,7 +12,7 @@ git clone git@github.com:NOC-MSM/CHAMOC.git
 ```
 or
 ```
-git clone https://github.com/NOC-MSM/PyNEMO.git
+git clone https://github.com/NOC-MSM/CHAMOC.git
 ```
 
 ## Create python environment
@@ -26,6 +26,12 @@ PYTHONPATH="${PYTHONPATH}:${PWD}/src/TOOLS/PYTHON/mymodules"
 export PYTHONPATH
 ```
 
+## To run the python scripts
+
+```
+python figure_01.py
+python figure_02.py
+```
 
 ## To run the R scripts
 
