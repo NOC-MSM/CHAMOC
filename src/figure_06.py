@@ -171,21 +171,25 @@ fractionGEO    = tabratioGEO_box[    id_amoc_max[999:999+1800], np.arange(0,1800
 fractionGEOBTR = tabratioGEOBTR_box[ id_amoc_max[999:999+1800], np.arange(0,1800)]
 #
 # 
-fig = plt.figure(figsize=(8,8), dpi=1000,facecolor='w')
+fig = plt.figure(figsize=(8,9), dpi=1000,facecolor='w')
 cmapstd  = plt.get_cmap( 'ocean_r', 21)
 labels = ['25$^\\circ$S','15$^\\circ$S','5$^\\circ$S','EQ','5$^\\circ$N','15$^\\circ$N','25$^\\circ$N','35$^\\circ$N','45$^\\circ$N','55$^\\circ$N','65$^\\circ$N']
 #
 fslab=12
 fstlab=10
+fscbtick=10
 #
 ax1 = plt.subplot(311)
-plt.pcolor(lat,depth,tabspread,cmap=cmapstd,vmin=0,vmax=15)
+plt.pcolor(lat,-depth,tabspread,cmap=cmapstd,vmin=0,vmax=15)
 plt.axvline(x=26,ymin=0,ymax=6000,color='red',linewidth=1.3)
 ax1.add_line(Line2D(lat,secdepth,color='black',lw=1.2))
 ti = ax1.set_title('(a) Ensemble spread saturation',fontsize=14)
 ax1.set_xticks([-25., -15., -5., 0., 5., 15., 25., 35., 45., 55., 65.])
 ax1.set_xticklabels(labels,fontsize=fstlab)
+plt.setp(ax1.get_yticklabels(), fontsize=fstlab)
 ax1.set_xlim([-34., 65.])
+ax1.set_ylim([0., 5700.])
+ax1.invert_yaxis()
 ax1.set_ylabel('depth (m)',fontsize=fslab)
 ax1.set_facecolor('lightgray')
 #
@@ -193,7 +197,7 @@ ax1.set_facecolor('lightgray')
 # ax1b.plot(lat,secdepth,color='black',lw=1.3)
 # ax1b.set_xlim([-34., 65.])
 # divider = make_axes_locatable(ax1b)
-# cax1b = divider.append_axes("right", size="5%", pad=0.4)
+# cax1b = divider.append_axes("right", size="5%", pad=0.3)
 # cax1b.set_facecolor('none')
 # for axis in ['top','bottom','left','right']:
 #     cax1b.spines[axis].set_linewidth(0)
@@ -202,26 +206,31 @@ ax1.set_facecolor('lightgray')
 #
 # axe pour la colorbar 1
 divider = make_axes_locatable(ax1)
-cax1 = divider.append_axes("right", size="5%", pad=0.4)
+cax1 = divider.append_axes("right", size="5%", pad=0.3)
 cb = plt.colorbar(cax=cax1)
-cb.set_label('Transport variance (Sv2)',fontsize=fslab)
+cb.set_label('Transport variance (Sv$^2$)',fontsize=fslab)
+cb.ax.tick_params(labelsize=fscbtick)
 ##
 ax2 = plt.subplot(312)
-plt.pcolor(lat,depth,tabratio,cmap=cmapstd,vmin=0,vmax=+1)
+plt.pcolor(lat,-depth,tabratio,cmap=cmapstd,vmin=0,vmax=+1)
 plt.axvline(x=26,ymin=0,ymax=6000,color='red',linewidth=1.3)
 ax2.add_line(Line2D(lat,secdepth,color='black',lw=1.2))
 ti = ax2.set_title('(b) Chaotic variability fraction',fontsize=14)
 ax2.set_xticks([-25., -15., -5., 0., 5., 15., 25., 35., 45., 55., 65.])
 ax2.set_xticklabels(labels,fontsize=fstlab)
+plt.setp(ax2.get_yticklabels(), fontsize=fstlab)
 ax2.set_xlim([-34., 65.])
+ax2.set_ylim([0., 5700.])
+ax2.invert_yaxis()
 ax2.set_ylabel('depth (m)',fontsize=fslab)
 ax2.set_facecolor('lightgray')
 #
 # axe pour la colorbar 1
 divider = make_axes_locatable(ax2)
-cax2 = divider.append_axes("right", size="5%", pad=0.4)
+cax2 = divider.append_axes("right", size="5%", pad=0.3)
 cb = plt.colorbar(cax=cax2)
 cb.set_label('Fraction',fontsize=fslab)
+cb.ax.tick_params(labelsize=fscbtick)
 #
  
 ax3 = plt.subplot(313)
@@ -239,23 +248,24 @@ ti = ax3.set_title('(c) Chaotic fraction at AMOC index level',fontsize=14)
 ax3.set_xticks([-25., -15., -5., 0., 5., 15., 25., 35., 45., 55., 65.]
 )
 ax3.set_xticklabels(labels,fontsize=fstlab)
+plt.setp(ax3.get_yticklabels(), fontsize=fstlab)
 ax3.set_xlim([-34., 65.])
 ax3.set_ylim([0., 1.2])
 #
 # rajout d'un axe vide pour l'alignement des subplots
 divider = make_axes_locatable(ax3)
-cax3 = divider.append_axes("right", size="5%", pad=0.4)
+cax3 = divider.append_axes("right", size="5%", pad=0.3)
 cax3.set_facecolor('none')
 for axis in ['top','bottom','left','right']:
     cax3.spines[axis].set_linewidth(0)
 cax3.set_xticks([])
 cax3.set_yticks([])
-lamoc   = Line2D([], [], color='red',     label='amoc'   )
-lbtr    = Line2D([], [], color='blue',    label='btr'    )
-lres    = Line2D([], [], color='black',   label='residual'    )
-lgeo    = Line2D([], [], color='fuchsia', label='geosh'    )
-lgeobtr = Line2D([], [], color='orange',  label='geosh+btr')
-cax3.legend(handles=[lamoc,lbtr,lgeo,lgeobtr,lres],frameon=False,loc=(-1,0.1),fontsize=12,handletextpad=0.,borderpad=1. )
+lamoc   = Line2D([], [], color='red',     label=' amoc'   )
+lbtr    = Line2D([], [], color='blue',    label=' btr'    )
+lres    = Line2D([], [], color='black',   label=' residual'    )
+lgeo    = Line2D([], [], color='fuchsia', label=' geosh'    )
+lgeobtr = Line2D([], [], color='orange',  label=' geosh+btr')
+cax3.legend(handles=[lamoc,lbtr,lgeo,lgeobtr,lres],frameon=False,loc=(-1,0.1),fontsize=10,handletextpad=0.,borderpad=1. )
 #leg = plt.legend((lamoc,lbtr,lgeo,lgeobtr),['amoc','btr','geo','geo+btr'])
 
 
